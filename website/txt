@@ -1,0 +1,337 @@
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import './App.css';
+import project1Image from './project.jpg'; // Example image, update with dynamic images if needed
+import CV_pdf from './CV_Arkapratim_Mondal.pdf'
+
+// Contact Dropdown Component
+function ContactDropdown() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div 
+      className="contact-dropdown-container"
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+      <button className="contact-button">
+        Contact Me
+      </button>
+      
+      {isOpen && (
+        <div className="contact-dropdown">
+          <a 
+            href="mailto:arkapratimmondal@gmail.com" 
+            className="contact-dropdown-item"
+          >
+            Mail me
+          </a>
+          <a 
+            href="https://www.linkedin.com/in/arkapratim-mondal" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="contact-dropdown-item"
+          >
+            LinkedIn
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Home Page with Name and Quote
+function Home() {
+  return (
+    <div className="home-page">
+      <div className="background"></div>
+      <nav className="nav-buttons">
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/post" className="nav-link">Posts</Link>
+        <Link to="/CV" className="nav-link">CV</Link>
+        <Link to="/projects" className="nav-link">Projects</Link>
+      </nav>
+      <div className="contact">
+        <ContactDropdown />
+      </div>
+      <motion.div 
+        className="landing-page"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <div className="name-description">
+          <motion.h1
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            Arkapratim Mondal
+          </motion.h1>
+          <motion.p
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            Student & Aspiring Software Engineer
+          </motion.p>
+        </div>
+      </motion.div>
+
+      <motion.section 
+        className="section"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2>About Me</h2>
+        <p>I'm a passionate computer science student with a keen interest in software development and emerging technologies. My goal is to create innovative solutions that make a positive impact.</p>
+      </motion.section>
+    </div>
+  );
+}
+
+// Detailed About Page
+function Post() {
+  const posts = [
+    {
+      id: 1,
+      name: 'Post 1',
+      image: project1Image,
+      description: 'This is a detailed description of Post 1.'
+    },
+    {
+      id: 2,
+      name: 'Post 2',
+      image: project1Image,
+      description: 'This is a detailed description of Post 2.'
+    },
+    {
+      id: 3,
+      name: 'Post 3',
+      image: project1Image,
+      description: 'This is a detailed description of Post 3.'
+    },
+    {
+      id: 4,
+      name: 'Post 4',
+      image: project1Image,
+      description: 'This is a detailed description of Post 4.'
+    },
+    {
+      id: 5,
+      name: 'Post 5',
+      image: project1Image,
+      description: 'This is a detailed description of Post 5.'
+    },
+    {
+      id: 6,
+      name: 'Post 6',
+      image: project1Image,
+      description: 'This is a detailed description of Post 6.'
+    }
+  ];
+  return (
+    <div className="post-page">
+      <div className="post-background"></div>
+      <nav className="nav-buttons">
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/post" className="nav-link">Posts</Link>
+        <Link to="/CV" className="nav-link">CV</Link>
+        <Link to="/projects" className="nav-link">Projects</Link>
+      </nav>
+      <div className="contact">
+        <ContactDropdown />
+      </div>
+      <motion.div 
+        className="post-section"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="name-description">
+          <motion.h1
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
+            Project Showcase
+          </motion.h1>
+          <motion.p
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            A collection of my software development projects.
+          </motion.p>
+        </div>
+        </motion.div>
+        <motion.section 
+        className="section"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="post-container">
+          {posts.map(post => (
+            <div className="post-box" key={post.id}>
+              <div className="post-item">
+                <div className="post-card">
+                  <div className="post-card-front">
+                    <img src={post.image} alt={post.name} className="post-image"/>
+                  </div>
+                  <div className="post-card-back">
+                    <div className="post-info">
+                      <h3>{post.name}</h3>
+                      <p>{post.description}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        </motion.section>
+    </div>
+  );
+}
+
+// CV Page
+function CV() { 
+  return (
+    <div className="CV-page">
+      <nav className="nav-buttons">
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/post" className="nav-link">Posts</Link>
+        <Link to="/CV" className="nav-link">CV</Link>
+        <Link to="/projects" className="nav-link">Projects</Link>
+      </nav>
+      <div className="contact">
+        <ContactDropdown />
+      </div>
+      <section className="CV-section">
+        <iframe
+          src={CV_pdf} // Ensure the correct file path here
+          title="CV"
+        />
+      </section>
+    </div>
+  );
+}
+
+
+
+
+// Dynamic Projects Page
+function Projects() {
+  const projects = [
+    {
+      id: 1,
+      name: 'Project 1',
+      image: project1Image,
+      description: 'This is a description of Project 1.'
+    },
+    {
+      id: 2,
+      name: 'Project 2',
+      image: project1Image,
+      description: 'This is a description of Project 2.'
+    },
+    {
+      id: 3,
+      name: 'Project 3',
+      image: project1Image,
+      description: 'This is a description of Project 3.'
+    },
+    {
+      id: 4,
+      name: 'Project 4',
+      image: project1Image,
+      description: 'This is a description of Project 4.'
+    },
+    {
+      id: 5,
+      name: 'Project 5',
+      image: project1Image,
+      description: 'This is a description of Project 5.'
+    },
+    {
+      id: 6,
+      name: 'Project 6',
+      image: project1Image,
+      description: 'This is a description of Project 6.'
+    }
+  ];
+
+  return (
+    <div className="project-page">
+      <div className="project-background"></div>
+      <nav className="nav-buttons">
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/post" className="nav-link">Posts</Link>
+        <Link to="/CV" className="nav-link">CV</Link>
+        <Link to="/projects" className="nav-link">Projects</Link>
+      </nav>
+      <div className="contact">
+        <ContactDropdown />
+      </div>
+      <motion.div 
+        className="project-section"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="name-description">
+          <motion.h1
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
+            Project Showcase
+          </motion.h1>
+          <motion.p
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            A collection of my software development projects.
+          </motion.p>
+        </div>
+        </motion.div>
+        <motion.section 
+        className="section"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="project-container">
+          {projects.map(project => (
+            <div className="project-box" key={project.id}>
+              <img src={project.image} alt={project.name} />
+              <div className="overlay">
+                <h3>{project.name}</h3>
+                <p>{project.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        </motion.section>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/post" element={<Post />} />
+        <Route path="/CV" element={<CV />} />
+        <Route path="/projects" element={<Projects />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
